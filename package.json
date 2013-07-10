@@ -1,0 +1,19 @@
+{
+  "name": "pathmap",
+  "version": "0.0.0",
+  "description": "Rake's #pathmap for JavaScript",
+  "main": "pathmap.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": "",
+  "keywords": [
+    "rake",
+    "pathmap"
+  ],
+  "author": "Jeremy Ruppel",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "*"
+  }
+}
