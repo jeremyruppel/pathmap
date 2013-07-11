@@ -5,6 +5,11 @@ describe( 'pathmap', function( ){
   it( 'should be a function', function( ){
     expect( pathmap ).to.be.a( 'function' );
   } );
+  describe( '#separator', function( ){
+    it( 'should be a slash by default', function( ){
+      expect( pathmap.separator ).to.equal( '/' );
+    } );
+  } );
   describe( '#dirname', function( ){
     it( 'returns the directory portion of a path', function( ){
       expect( pathmap.dirname( 'foo/bar.txt' ) ).to.equal( 'foo' );

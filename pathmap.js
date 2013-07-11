@@ -13,6 +13,15 @@
     } );
   };
 
+  /**
+   * The path separator.
+   */
+  pathmap.separator = '/';
+
+  /**
+   * Returns the directory name of `path`. Returns '.'
+   * if there is no directory part.
+   */
   pathmap.dirname = function( path ){
     var match = /((?:\w+\/?)+)(?=\/)/.exec( path );
     return match ? match[ 1 ] : '.';
@@ -23,10 +32,10 @@
    * extension `ext` if given.
    */
   pathmap.basename = function( path, ext ){
-    path = this.chomp( path, '/' );
+    path = this.chomp( path, this.separator );
     path = this.chomp( path, ext );
 
-    return path.split( '/' ).pop( );
+    return path.split( this.separator ).pop( );
   };
 
   /**
@@ -75,6 +84,36 @@
      */
     'd' : function( ){
       return pathmap.dirname( this );
+    },
+
+    /**
+     * The file extension of the path. An empty string if there
+     * is no extension.
+     */
+    'x' : function( ){
+      return pathmap.extname( this );
+    },
+
+    /**
+     * Everything but the file extension.
+     */
+    'X' : function( ){
+      return pathmap.chomp( this, pathmap.extname( this ) );
+    },
+
+    /**
+     * The alternate file separator if defined, otherwise use
+     * the standard file separator.
+     */
+    's' : function( ){
+      return pathmap.separator;
+    },
+
+    /**
+     * A percent sign.
+     */
+    '%' : function( ){
+      return '%';
     }
   };
 

@@ -14,4 +14,16 @@ describe( 'substitution', function( ){
   it( 'returns the directory list of the path', function( ){
     expect( pathmap( 'a/b/c/d/file.txt', '%d' ) ).to.equal( 'a/b/c/d' );
   } );
+  it( 'returns the extension of the path', function( ){
+    expect( pathmap( 'a/b/c/d/file.txt', '%x' ) ).to.equal( '.txt' );
+  } );
+  it( 'returns everything but the extension of the path', function( ){
+    expect( pathmap( 'a/b/c/d/file.txt', '%X' ) ).to.equal( 'a/b/c/d/file' );
+  } );
+  it( 'returns the file separator', function( ){
+    expect( pathmap( 'a/b/c/d/file.txt', '%s' ) ).to.equal( '/' );
+  } );
+  it( 'returns a literal percent sign', function( ){
+    expect( pathmap( 'a/b/c/d/file.txt', '%%' ) ).to.equal( '%' );
+  } );
 } );
