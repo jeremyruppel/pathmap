@@ -35,3 +35,9 @@ pathmap( 'a/b/c/d/file.txt', '%-2d' ); // => 'c/d'
 ``` js
 pathmap( 'file.md', '%X%{md,mdown}x' ); // => 'file.mdown'
 ```
+
+## License
+
+pathmap.js is released under the MIT license.
+
+Though no code was taken directly from it, the concepts, behavior, patterns, and some comments are were originally created by Jim Weirich and can be found in the excellent [rake](http://rake.rubyforge.org/) library, also MIT licensed.

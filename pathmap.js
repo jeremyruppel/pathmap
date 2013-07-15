@@ -1,3 +1,10 @@
+/**
+ * pathmap.js
+ * (c) 2009-2013 Jeremy Ruppel
+ * pathmap.js may be freely distributed under the MIT license.
+ * Concepts originally introduced by rake, (c) 2004 Jim Weirich,
+ * also released under the MIT license.
+ */
 ( function( exports, undefined ){
 
   /**
