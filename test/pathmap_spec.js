@@ -57,4 +57,28 @@ describe( 'pathmap', function( ){
       expect( pathmap.chomp( 'foo/bar.txt', '.js' ) ).to.equal( 'foo/bar.txt' );
     } );
   } );
+  describe( '#replace', function( ){
+    it( 'parses the spec and performs the replacement', function( ){
+      expect( pathmap.replace( 'bar', 'ar,eer' ) ).to.equal( 'beer' );
+    } );
+    it( 'treats the first part of the replacement as a regex', function( ){
+      expect( pathmap.replace( 'src_work/src/org/onstepback/proj/A.java',
+        '\\bsrc\\b,bin' ) ).to.equal( 'src_work/bin/org/onstepback/proj/A.java' );
+    } );
+    it( 'supports multiple replacement specs', function( ){
+      expect( pathmap.replace( 'src_work/src/org/onstepback/proj/A.java',
+        '\\bsrc\\b,bin;java,class' ) ).to.equal( 'src_work/bin/org/onstepback/proj/A.class' );
+    } );
+    it( 'replaces with an empty string if no replacement is given', function( ){
+      expect( pathmap.replace( 'foobar', 'foo' ) ).to.equal( 'bar' );
+    } );
+    it( 'yields the replacement to the callback if a splat is given', function( ){
+      expect( pathmap.replace( 'foo.TXT', 'TXT,*', function( ext ){
+        return ext.toLowerCase( );
+      } ) ).to.equal( 'foo.txt' );
+    } );
+    it( 'returns the string as-is if no pattern is given', function( ){
+      expect( pathmap.replace( 'foo.txt' ) ).to.equal( 'foo.txt' );
+    } );
+  } );
 } );

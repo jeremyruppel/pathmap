@@ -3,12 +3,11 @@
   /**
    *
    */
-  function pathmap( path, spec ){
-    return spec.replace( /%(-?\d+)?([\w%])/g, function( match, args, pattern ){
+  function pathmap( path, spec, callback ){
+    return spec.replace( /%(?:\{([^}]*)\})?(-?\d+)?([\w%])/g, function( match, replace, count, pattern ){
       if( patterns[ pattern ] ){
-        return patterns[ pattern ].call( path, args );
+        return patterns[ pattern ].call( path, replace, count, callback );
       } else {
-        // console.log( [ ].slice.call( arguments ) );
         throw new Error( "Unknown pathmap specifier " + match + " in '" + spec + "'" );
       }
     } );
@@ -69,51 +68,82 @@
     return path.replace( new RegExp( str + '$' ), '' );
   };
 
+  /**
+   * Perform the pathmap replacement operations on the given
+   * string. The patterns take the form 'pat1,rep1;pat2,rep2...'.
+   */
+  pathmap.replace = function( str, patterns, callback ){
+    if( typeof patterns == 'undefined' ) return str;
+
+    patterns = patterns.split( ';' );
+
+    for( var i = 0; i < patterns.length; i++ ){
+      var spec        = patterns[ i ].split( ',' )
+        , pattern     = new RegExp( spec[ 0 ] )
+        , replacement = spec[ 1 ];
+
+      if( replacement == '*' && callback ){
+        str = str.replace( pattern, callback );
+      } else if( typeof replacement == 'undefined' ){
+        str = str.replace( pattern, '' );
+      } else {
+        str = str.replace( pattern, replacement );
+      }
+    }
+
+    return str;
+  };
+
   var patterns = {
 
     /**
      * The complete path.
      */
-    'p' : function( ){
-      return this;
+    'p' : function( replace, count, callback ){
+      return pathmap.replace(
+        this, replace, callback );
     },
 
     /**
      * The base file name of the path, with its file extension,
      * but without any directories.
      */
-    'f' : function( ){
-      // TODO configure file separator
-      return pathmap.basename( this );
+    'f' : function( replace, count, callback ){
+      return pathmap.replace(
+        pathmap.basename( this ), replace, callback );
     },
 
     /**
      * The file name of the path without its file extension.
      */
-    'n' : function( ){
-      return pathmap.basename( this, pathmap.extname( this ) );
+    'n' : function( replace, count, callback ){
+      return pathmap.replace(
+        pathmap.basename( this, pathmap.extname( this ) ), replace, callback );
     },
 
     /**
      * The directory list of the path.
      */
-    'd' : function( count ){
-      return pathmap.dirname( this, count );
+    'd' : function( replace, count, callback ){
+      return pathmap.replace(
+        pathmap.dirname( this, count ), replace, callback );
     },
 
     /**
      * The file extension of the path. An empty string if there
      * is no extension.
      */
-    'x' : function( ){
-      return pathmap.extname( this );
+    'x' : function( replace, count, callback ){
+      return pathmap.replace(
+        pathmap.extname( this ), replace, callback );
     },
 
     /**
      * Everything but the file extension.
      */
-    'X' : function( ){
-      return pathmap.chomp( this, pathmap.extname( this ) );
+    'X' : function( replace, count, callback ){
+      return pathmap.replace(
+        pathmap.chomp( this, pathmap.extname( this ) ), replace, callback );
     },
 
     /**
