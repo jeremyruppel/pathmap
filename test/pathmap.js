@@ -5,9 +5,9 @@ describe( 'pathmap', function( ){
   it( 'should be a function', function( ){
     expect( pathmap ).to.be.a( 'function' );
   } );
-  describe( '#separator', function( ){
+  describe( '#sep', function( ){
     it( 'should be a slash by default', function( ){
-      expect( pathmap.separator ).to.equal( '/' );
+      expect( pathmap.sep ).to.equal( '/' );
     } );
   } );
   describe( '#dirname', function( ){
@@ -16,6 +16,9 @@ describe( 'pathmap', function( ){
     } );
     it( 'returns a dot if there is no directory', function( ){
       expect( pathmap.dirname( 'foo' ) ).to.equal( '.' );
+    } );
+    it( 'returns a slash if the parent is root', function( ){
+      expect( pathmap.dirname( '/foo' ) ).to.equal( '/' );
     } );
   } );
   describe( '#basename', function( ){
