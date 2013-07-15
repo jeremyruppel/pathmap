@@ -1,14 +1,24 @@
 ( function( exports, undefined ){
 
   /**
-   *
+   * Matches any pathmap patterns, with the following capture groups:
+   * 1: An optional replacement spec.
+   * 2: An optional count.
+   * 3: The pathmap pattern identifier.
+   */
+  var regexp = /%(?:\{([^}]*)\})?(-?\d+)?([\w%])/g;
+
+  /**
+   * Maps a path to a path specification. The supported patterns are:
+   * TODO
    */
   function pathmap( path, spec, callback ){
-    return spec.replace( /%(?:\{([^}]*)\})?(-?\d+)?([\w%])/g, function( match, replace, count, pattern ){
+    return spec.replace( regexp, function( match, replace, count, pattern ){
       if( patterns[ pattern ] ){
         return patterns[ pattern ].call( path, replace, count, callback );
       } else {
-        throw new Error( "Unknown pathmap specifier " + match + " in '" + spec + "'" );
+        throw new Error(
+          "Unknown pathmap specifier " + match + " in '" + spec + "'" );
       }
     } );
   };

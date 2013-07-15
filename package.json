@@ -1,12 +1,12 @@
 {
   "name": "pathmap",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Rake's #pathmap for JavaScript",
   "main": "pathmap.js",
   "scripts": {
     "test": "mocha"
   },
-  "repository": "",
+  "repository": "https://github.com/jeremyruppel/pathmap",
   "keywords": [
     "rake",
     "pathmap"
