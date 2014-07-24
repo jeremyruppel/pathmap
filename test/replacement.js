@@ -23,4 +23,41 @@ describe('replacement', function() {
   it('supports replacement for %X', function() {
     assert.equal(subject('a/b/c/d/file.txt', '%{a,A}X'), 'A/b/c/d/file');
   });
+  describe('callbacks', function() {
+    it('supports replacement callbacks for %d', function() {
+      assert.equal(subject('a/b/c/d/file.txt', '%{a,*}d', function() {
+        return 'A';
+      }), 'A/b/c/d');
+    });
+    it('supports replacement callbacks and partials for %d', function() {
+      assert.equal(subject('a/b/c/d/file.txt', '%{a,*}2d', function() {
+        return 'A';
+      }), 'A/b');
+    });
+    it('supports replacement callbacks for %p', function() {
+      assert.equal(subject('a/b/c/d/file.txt', '%{a,*}p', function() {
+        return 'A';
+      }), 'A/b/c/d/file.txt');
+    });
+    it('supports replacement callbacks for %f', function() {
+      assert.equal(subject('a/b/c/d/file.txt', '%{txt,*}f', function() {
+        return 'js';
+      }), 'file.js');
+    });
+    it('supports replacement callbacks for %n', function() {
+      assert.equal(subject('a/b/c/d/file.txt', '%{ile,*}n', function() {
+        return 'ood';
+      }), 'food');
+    });
+    it('supports replacement callbacks for %x', function() {
+      assert.equal(subject('a/b/c/d/file.txt', '%{xt,*}x', function() {
+        return 'ext';
+      }), '.text');
+    });
+    it('supports replacement callbacks for %X', function() {
+      assert.equal(subject('a/b/c/d/file.txt', '%{a,*}X', function() {
+        return 'A';
+      }), 'A/b/c/d/file');
+    });
+  });
 });
