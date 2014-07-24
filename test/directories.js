@@ -1,16 +1,16 @@
-var pathmap = require( '..' ).pathmap
-  , expect  = require( 'chai' ).expect;
+var subject = require( '..' ).pathmap;
+var assert = require('assert');
 
 describe( 'directories', function( ){
   it( 'returns all directories by default', function( ){
-    expect( pathmap( 'a/b/c/d/file.txt', '%d' ) ).to.equal( 'a/b/c/d' );
+    assert.equal( subject( 'a/b/c/d/file.txt', '%d' ), 'a/b/c/d' );
   } );
   it( 'returns `n` directories from the left-hand side', function( ){
-    expect( pathmap( 'a/b/c/d/file.txt', '%1d' ) ).to.equal( 'a' );
-    expect( pathmap( 'a/b/c/d/file.txt', '%2d' ) ).to.equal( 'a/b' );
+    assert.equal( subject( 'a/b/c/d/file.txt', '%1d' ), 'a' );
+    assert.equal( subject( 'a/b/c/d/file.txt', '%2d' ), 'a/b' );
   } );
   it( 'returns `n` directories from the right-hand side', function( ){
-    expect( pathmap( 'a/b/c/d/file.txt', '%-1d' ) ).to.equal( 'd' );
-    expect( pathmap( 'a/b/c/d/file.txt', '%-2d' ) ).to.equal( 'c/d' );
+    assert.equal( subject( 'a/b/c/d/file.txt', '%-1d' ), 'd' );
+    assert.equal( subject( 'a/b/c/d/file.txt', '%-2d' ), 'c/d' );
   } );
 } );

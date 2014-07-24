@@ -17,7 +17,6 @@
   "author": "Jeremy Ruppel",
   "license": "MIT",
   "devDependencies": {
-    "mocha": "*",
-    "chai": "*"
+    "mocha": "^1.20.1"
   }
 }
