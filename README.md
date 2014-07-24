@@ -3,6 +3,9 @@
 Rake's [#pathmap](http://rake.rubyforge.org/classes/String.html#M000017) method
 for JavaScript. Think of it like `sprintf` for paths.
 
+> [![NPM version][npm-badge]][npm]
+> [![Build Status][travis-badge]][travis-ci]
+
 ## Usage
 
 `pathmap` accepts a path and a pathmap spec and returns a formatted string.
@@ -42,4 +45,8 @@ pathmap('file.md', '%X%{md,mdown}x'); // => 'file.mdown'
 
 [MIT License][LICENSE]
 
+[npm]: http://badge.fury.io/js/pathmap
+[npm-badge]: https://badge.fury.io/js/pathmap.svg
+[travis-ci]: https://travis-ci.org/jeremyruppel/pathmap
+[travis-badge]: https://travis-ci.org/jeremyruppel/pathmap.svg?branch=master
 [LICENSE]: https://github.com/jeremyruppel/pathmap/blob/master/LICENSE
