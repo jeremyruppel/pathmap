@@ -4,7 +4,8 @@
   "description": "Rake's pathmap for JavaScript",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "jscs": "jscs ."
   },
   "repository": "https://github.com/jeremyruppel/pathmap",
   "keywords": [
@@ -17,6 +18,7 @@
   "author": "Jeremy Ruppel",
   "license": "MIT",
   "devDependencies": {
+    "jscs": "^1.5.8",
     "mocha": "^1.20.1"
   }
 }
