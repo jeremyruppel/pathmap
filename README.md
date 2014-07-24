@@ -1,7 +1,6 @@
-# pathmap.js
+# pathmap
 
-Rake's [#pathmap](http://rake.rubyforge.org/classes/String.html#M000017) method
-for JavaScript. Think of it like `sprintf` for paths.
+Rake's [pathmap](http://devblog.avdi.org/2014/04/24/rake-part-4-pathmap/) for JavaScript. Think of it like `sprintf` for paths.
 
 > [![NPM version][npm-badge]][npm]
 > [![Build Status][travis-badge]][travis-ci]
