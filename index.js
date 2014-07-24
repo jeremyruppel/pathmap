@@ -35,8 +35,8 @@ pathmap.sep = '/';
  * if there is no directory part.
  */
 pathmap.dirname = function(path, count) {
-  path = this.chomp(path, this.sep);
-  path = path.split(this.sep);
+  path = pathmap.chomp(path, pathmap.sep);
+  path = path.split(pathmap.sep);
   path = path.slice(0, -1);
 
   if (count < 0) {
@@ -50,10 +50,10 @@ pathmap.dirname = function(path, count) {
     return '.';
   }
   if (path.length == 1 && path[ 0 ] == '') {
-    return this.sep;
+    return pathmap.sep;
   }
 
-  return path.join(this.sep);
+  return path.join(pathmap.sep);
 };
 
 /**
@@ -61,8 +61,8 @@ pathmap.dirname = function(path, count) {
  * extension `ext` if given.
  */
 pathmap.basename = function(path, ext) {
-  path = this.chomp(path, this.sep);
-  path = this.chomp(path, ext);
+  path = pathmap.chomp(path, pathmap.sep);
+  path = pathmap.chomp(path, ext);
 
   return path.split(this.sep).pop();
 };
