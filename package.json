@@ -1,15 +1,18 @@
 {
   "name": "pathmap",
   "version": "1.0.0",
-  "description": "Rake's #pathmap for JavaScript",
-  "main": "pathmap.js",
+  "description": "Rake's pathmap for JavaScript",
+  "main": "index.js",
   "scripts": {
     "test": "mocha"
   },
   "repository": "https://github.com/jeremyruppel/pathmap",
   "keywords": [
     "rake",
-    "pathmap"
+    "pathmap",
+    "path",
+    "sprintf",
+    "format"
   ],
   "author": "Jeremy Ruppel",
   "license": "MIT",

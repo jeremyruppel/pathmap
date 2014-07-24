@@ -1,4 +1,4 @@
-var pathmap = require( '../pathmap.js' ).pathmap
+var pathmap = require( '..' ).pathmap
   , expect  = require( 'chai' ).expect;
 
 describe( 'substitution', function( ){
