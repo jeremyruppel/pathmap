@@ -12,4 +12,9 @@ describe('patterns', function() {
     assert.equal(typeof subject.patterns['s'], 'function');
     assert.equal(typeof subject.patterns['%'], 'function');
   });
+  it('throws if an undefined pattern is given', function() {
+    assert.throws(function() {
+      subject(__filename, '%q');
+    }, 'Unknown pathmap specifier q in "%q"');
+  });
 });
