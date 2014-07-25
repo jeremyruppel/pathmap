@@ -15,9 +15,10 @@ var regexp = /%(?:\{([^}]*)\})?(-?\d+)?([\w%])/g;
  * Maps a path to a path spec.
  */
 function pathmap(path, spec, callback) {
-  return spec.replace(regexp, function(match, replace, count, pattern) {
-    if (patterns[pattern]) {
-      return patterns[pattern].call(path, replace, count, callback);
+  return spec.replace(regexp, function(match, replace, count, token) {
+    var pattern;
+    if (pattern = pathmap.patterns[token]) {
+      return pattern.call(path, replace, count, callback);
     } else {
       throw new Error(
         'Unknown pathmap specifier ' + match + ' in "' + spec + '"');
@@ -64,7 +65,7 @@ pathmap.basename = function(path, ext) {
   path = pathmap.chomp(path, pathmap.sep);
   path = pathmap.chomp(path, ext);
 
-  return path.split(this.sep).pop();
+  return path.split(pathmap.sep).pop();
 };
 
 /**
@@ -119,7 +120,7 @@ pathmap.replace = function(str, patterns, callback) {
 /**
  * Pattern tokens
  */
-var patterns = {
+pathmap.patterns = {
 
   /**
    * The complete path.
