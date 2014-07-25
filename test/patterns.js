@@ -14,7 +14,14 @@ describe('patterns', function() {
   });
   it('throws if an undefined pattern is given', function() {
     assert.throws(function() {
-      subject(__filename, '%q');
+      subject('a/b/c/d/file.txt', '%q');
     }, 'Unknown pathmap specifier q in "%q"');
+  });
+  it('allows new patterns to be added', function() {
+    subject.patterns['z'] = function() {
+      return 'ZZZ';
+    };
+    assert.equal(subject('a/b/c/d/file.txt', '%d/%z%x'), 'a/b/c/d/ZZZ.txt');
+    delete subject.patterns['z'];
   });
 });
